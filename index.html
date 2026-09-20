@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E1420">
+<title>Tarjeta de contacto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  /* ======================================================
+     TOKENS DE DISEÑO
+     ====================================================== */
+  :root{
+    --ink:            #0E1420;
+    --ink-soft:       #161D2C;
+    --hairline:       rgba(237, 239, 245, 0.10);
+    --brass:          #C08552;
+    --brass-soft:     rgba(192, 133, 82, 0.16);
+    --text:           #EDEFF5;
+    --text-muted:     #98A1B5;
+    --radius-lg:      22px;
+    --radius-sm:      14px;
+    --font-display:   'Fraunces', Georgia, serif;
+    --font-body:      'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background: var(--ink);
+  }
+
+  body{
+    font-family: var(--font-body);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 48px 20px calc(48px + env(safe-area-inset-bottom, 0px));
+    background:
+      radial-gradient(680px 420px at 50% -8%, rgba(192,133,82,0.14), transparent 60%),
+      var(--ink);
+  }
+
+  .card{
+    width: 100%;
+    max-width: 420px;
+  }
+
+  /* ---------- Cabecera / presentación ---------- */
+
+  .header{
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .monogram{
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--brass);
+    background: var(--ink-soft);
+    border: 1px solid rgba(192,133,82,0.45);
+    overflow: hidden;
+  }
+
+  .monogram .profile-photo{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .name{
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 1.15;
+    margin: 0 0 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .role{
+    font-size: 15px;
+    color: var(--text-muted);
+    margin: 0 0 16px;
+  }
+
+  .org-badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--hairline);
+    background: var(--ink-soft);
+    font-size: 12.5px;
+    color: var(--text-muted);
+  }
+
+  /* Sustituye este bloque de texto por <img src="https://imgs.search.brave.com/Mrz_ld-kK6vn5UFEpySboHMipdL68B1mBjX4srGN5EI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/ZnJlZWJpZXN1cHBs/eS5jb20vbG9nb3Mv/bGFyZ2UvMngvaWNl/eC1sb2dvLXN2Zy12/ZWN0b3Iuc3Zn" alt="ICEX" style="height:14px;width:auto;">
+     cuando tengas el logotipo oficial (pídelo en tu departamento de comunicación de ICEX). */
+  .org-badge b{
+    color: var(--text);
+    font-weight: 700;
+    letter-spacing: 0.4px;
+  }
+
+  .bio{
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 34ch;
+    margin: 18px auto 0;
+  }
+
+  /* ---------- Botón guardar contacto ---------- */
+
+  .cta{
+    display: block;
+    margin: 26px 0 0;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    background: var(--brass);
+    color: #17130D;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.2px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cta:active{ transform: scale(0.985); }
+
+  .cta-note{
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 10px 0 0;
+  }
+
+  /* ---------- Lista de enlaces ---------- */
+
+  .links{
+    margin-top: 30px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .link-row{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 4px;
+    text-decoration: none;
+    color: var(--text);
+    border-bottom: 1px solid var(--hairline);
+    transition: background-color 0.15s ease;
+  }
+
+  .link-row:active{
+    background-color: var(--brass-soft);
+  }
+
+  .link-icon{
+    flex: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--hairline);
+  }
+
+  .link-icon svg{
+    width: 18px;
+    height: 18px;
+    stroke: var(--text);
+    fill: none;
+  }
+
+  .link-text{ flex: 1; }
+
+  .link-title{
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .link-sub{
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+ 
+  /* ---------- Accesibilidad ---------- */
+
+  a:focus-visible, .cta:focus-visible{
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .card{
+      animation: rise 0.6s ease both;
+    }
+    @keyframes rise{
+      from{ opacity: 0; transform: translateY(10px); }
+      to{ opacity: 1; transform: translateY(0); }
+    }
+  }
+
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="header">
+    <div class="monogram" id="monogram"><img src="https://media.licdn.com/dms/image/v2/D5603AQHyFjh064aMCw/profile-displayphoto-crop_800_800/B56Z_WW_efGsAI-/0/1786007780054?e=1791417600&v=beta&t=ck1qXTiwGbGzxv_YSbP-mslssMX1OjBmE9uNhQUH4jI" alt="Foto de perfil" class="profile-photo"></div>
+    <h1 class="name" id="nombreDisplay">Nombre Apellido</h1>
+    <p class="role" id="rolDisplay"></p>
+  </div>
+
+  <a class="cta" id="saveContact" href="#">Save contact</a>
+  <p class="cta-note">For Android devices, a file is being generated. Open it to add to contact list.</p>
+
+  <div class="links">
+
+    <a class="link-row" id="linkGithub" href="#" target="_blank" rel="noopener">
+      <span class="link-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.4 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+      </span>
+      <span class="link-text">
+        <div class="link-title">GitHub</div>
+      </span>
+    </a>
+
+    <a class="link-row" id="linkLinkedin" href="#" target="_blank" rel="noopener">
+      <span class="link-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="7.5" x2="8" y2="7.51"/><path d="M12 16v-3.2c0-1.5 1-2.3 2.3-2.3 1.2 0 1.7.9 1.7 2.3V16"/></svg>
+      </span>
+      <span class="link-text">
+        <div class="link-title">LinkedIn</div>
+      </span>
+    </a>
+
+    <a class="link-row" id="linkWhatsapp" href="#" target="_blank" rel="noopener">
+      <span class="link-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.5 8.5 0 0 1-4-1L3 20l1.2-5a8.3 8.3 0 0 1-1.1-4.2A8.4 8.4 0 0 1 12 3a8.3 8.3 0 0 1 6 2.5 8.2 8.2 0 0 1 3 6"/><path d="M8.5 9.3c0 3.2 2.9 6 6.1 6 .9 0 1-.3.9-1l-.2-1.2c0-.3-.3-.6-.6-.6h-1.4c-.2 0-.5-.1-.6-.3l-.7-1a.7.7 0 0 1 0-.8l.5-.9c.1-.2.1-.5 0-.7l-.9-2c-.1-.3-.4-.4-.7-.4h-1c-.4 0-.7.3-.7.6"/></svg>
+      </span>
+      <span class="link-text">
+        <div class="link-title">WhatsApp</div>
+      </span>
+    </a>
+
+    <a class="link-row" id="linkEmail" href="#">
+      <span class="link-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>
+      </span>
+      <span class="link-text">
+        <div class="link-title">Email</div>
+        <div class="link-sub" id="emailDisplay">sergio.puertas@icex.es</div>
+      </span>
+    </a>
+
+    <a class="link-row" id="linkPortfolio" href="#" target="_blank" rel="noopener" style="border-bottom:none;">
+      <span class="link-icon">
+        <svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.6 3.7 5.7 3.7 9s-1.3 6.4-3.7 9c-2.4-2.6-3.7-5.7-3.7-9S9.6 5.6 12 3z"/></svg>
+      </span>
+      <span class="link-text">
+        <div class="link-title">Tech Portfolio</div>
+      </span>
+    </a>
+
+  </div>
+</div>
+
+<script>
+
+  /* ======================================================
+     ÚNICO SITIO QUE TIENES QUE EDITAR
+     Rellena tus datos reales aquí. El resto de la página
+     se rellena sola a partir de esto.
+     ====================================================== */
+  const CONFIG = {
+    nombre:      "Sergio Puertas Pérez",
+    puesto:      "Trade and Investment Advisor - ICEX España Exportación e Inversiones",
+
+    telefono:    "+34604051767",              
+    email:       "sergio.puertas@icex.es",
+
+    github:      "https://github.com/sergiopuertas",
+    linkedin:    "https://www.linkedin.com/in/sergio-puertas-pérez-88a285243",
+    portfolio:   "https://sergiopuertas.github.io/",
+
+    whatsappMensaje: "Hello, it's a pleasure to contact you!."
+  };
+
+  /* ------------------------------------------------------ */
+
+  function iniciales(nombre){
+    return nombre
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(p => p[0].toUpperCase())
+      .join("");
+  }
+
+  function construirVCard(d){
+    return [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      `FN:${d.nombre}`,
+      `ORG: ${d.nombre}`,
+      `TITLE:${d.puesto}`,
+      `TEL;TYPE=CELL:${d.telefono}`,
+      `EMAIL:${d.email}`,
+      `URL:${d.portfolio}`,
+      "END:VCARD"
+    ].join("\r\n");
+  }
+
+  document.getElementById("nombreDisplay").textContent = CONFIG.nombre;
+  document.getElementById("rolDisplay").textContent    = CONFIG.puesto;
+  document.getElementById("emailDisplay").textContent  = CONFIG.email;
+
+  document.getElementById("linkGithub").href    = CONFIG.github;
+  document.getElementById("linkLinkedin").href  = CONFIG.linkedin;
+  document.getElementById("linkPortfolio").href = CONFIG.portfolio;
+  document.getElementById("linkEmail").href     = "mailto:" + CONFIG.email;
+
+  const telWa = CONFIG.telefono.replace(/[^\d]/g, "");
+  document.getElementById("linkWhatsapp").href =
+    `https://wa.me/${telWa}?text=${encodeURIComponent(CONFIG.whatsappMensaje)}`;
+
+  const saveBtn = document.getElementById("saveContact");
+  saveBtn.addEventListener("click", function(){
+    const vcard = construirVCard(CONFIG);
+    this.href = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcard);
+    this.download = CONFIG.nombre.replace(/\s+/g, "_") + ".vcf";
+  });
+
+</script>
+
+</body>
+</html>
